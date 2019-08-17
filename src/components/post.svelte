@@ -1,7 +1,6 @@
 <script>
   export let jsonData;
   jsonData = jsonData.data;
-  console.log(jsonData);
 </script>
 
 <style>
