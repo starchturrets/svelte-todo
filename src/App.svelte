@@ -10,7 +10,7 @@
   ];
 
   let msg = '';
-  if (!localStorage.arr) {
+  if (!localStorage.getItem(arr)) {
     localStorage.setItem('arr', JSON.stringify(arr));
   } else {
     arr = JSON.parse(localStorage.getItem('arr'));
