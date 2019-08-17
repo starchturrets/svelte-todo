@@ -1,5 +1,5 @@
 {
-  "name": "svelte-testing",
+  "name": "svelte-todo",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -22,12 +22,14 @@
     "parcel-plugin-svelte": "^4.0.2",
     "prettier": "^1.18.2",
     "prettier-plugin-svelte": "^0.7.0",
+    "sass": "^1.22.10",
     "stylelint": "^10.1.0",
+    "stylelint-config-recommended": "^2.2.0",
     "stylelint-config-standard": "^18.3.0",
     "svelte": "^3.8.1"
   },
   "stylelint": {
-    "extends": "stylelint-config-standard"
+    "extends": "stylelint-config-recommended"
   },
   "prettier": {
     "singleQuote": true,
@@ -35,7 +37,9 @@
     "pluginSearchDirs": [
       "./node_modules"
     ],
-    "plugins": ["./node_modules/prettier-plugin-svelte"]
+    "plugins": [
+      "./node_modules/prettier-plugin-svelte"
+    ]
   },
   "eslintIgnore": [
     "src/index.html",

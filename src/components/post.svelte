@@ -1,13 +1,20 @@
 <script>
-  export let data;
+  export let jsonData;
+  jsonData = jsonData.data;
+  console.log(jsonData);
 </script>
 
 <style>
   div {
-    color: purple;
-    font-family: 'Comic Sans MS', sans-serif;
-    font-size: 2em;
+    font: inherit;
+  }
+
+  div.post {
+    border: solid 1px black;
   }
 </style>
 
-<div>This is a paragraph.{data}</div>
+<div class="post">
+  <a href="https://reddit.com{jsonData.permalink}">{jsonData.title}</a>
+  <span>/r/{jsonData.subreddit}</span>
+</div>
