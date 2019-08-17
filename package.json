@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "serve": "parcel serve src/index.html --open"
+    "serve": "parcel serve src/index.html --open",
+    "build": "parcel build src/index.html"
   },
   "browserslist": [
     "last 1 chrome versions"
