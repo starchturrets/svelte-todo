@@ -2,7 +2,7 @@
   // import Post from './components/post.svelte';
   // localStorage.clear();
   export let name;
-  export let arr;
+  export let arr = [];
   let msg = '';
   if (!localStorage.arr) {
     localStorage.setItem('arr', JSON.stringify(arr));
