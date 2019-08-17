@@ -12,7 +12,7 @@
   let msg = '';
   if (!localStorage.getItem(arr)) {
     localStorage.setItem('arr', JSON.stringify(arr));
-  } else {
+  } else if (localStorage.getItem(arr).length > 0) {
     arr = JSON.parse(localStorage.getItem('arr'));
   }
   const updateStore = () => {
