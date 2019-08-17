@@ -2,13 +2,14 @@
   // import Post from './components/post.svelte';
   // localStorage.clear();
   export let name;
-  export let arr = [];
-
+  export let arr;
   let msg = '';
   if (!localStorage.getItem(arr)) {
+    console.log('no');
     localStorage.setItem('arr', JSON.stringify(arr));
   } else {
-    arr = JSON.parse(localStorage.getItem('arr') || {});
+    console.log('yes');
+    arr = JSON.parse(localStorage.getItem('arr'));
   }
   const updateStore = () => {
     localStorage.arr = JSON.stringify(arr);
@@ -19,8 +20,9 @@
         done: false,
         string: ev.target.value,
       };
-
-      arr = [...arr, item];
+      arr.push(item);
+      arr = arr;
+      // arr = [...arr, item];
       msg = '';
     }
     updateStore();

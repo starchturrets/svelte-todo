@@ -10,7 +10,7 @@ const app = new App({
   target: document.body,
   props: {
     name: 'world',
-    // arr: arrayOfItems,
+    arr: JSON.parse(localStorage.getItem('arr')) || [],
   },
 });
 
