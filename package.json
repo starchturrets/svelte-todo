@@ -32,7 +32,7 @@
     "extends": "stylelint-config-recommended"
   },
   "prettier": {
-    "printWidth": 140,
+    "printWidth": 120,
     "singleQuote": true,
     "trailingComma": "all",
     "pluginSearchDirs": [
@@ -45,7 +45,7 @@
       {
         "files": "./src/App.svelte",
         "options": {
-          "printWidth": 1800
+          "printWidth": 120
         }
       }
     ]
