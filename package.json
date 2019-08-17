@@ -21,6 +21,7 @@
     "parcel-bundler": "^1.12.3",
     "parcel-plugin-svelte": "^4.0.2",
     "prettier": "^1.18.2",
+    "prettier-plugin-svelte": "^0.7.0",
     "stylelint": "^10.1.0",
     "stylelint-config-standard": "^18.3.0",
     "svelte": "^3.8.1"
@@ -30,7 +31,11 @@
   },
   "prettier": {
     "singleQuote": true,
-    "trailingComma": "all"
+    "trailingComma": "all",
+    "pluginSearchDirs": [
+      "./node_modules"
+    ],
+    "plugins": ["./node_modules/prettier-plugin-svelte"]
   },
   "eslintIgnore": [
     "src/index.html",
