@@ -7,8 +7,8 @@
   let msg = '';
   if (!localStorage.getItem(arr)) {
     localStorage.setItem('arr', JSON.stringify(arr));
-  } else if (localStorage.getItem(arr).length > 0) {
-    arr = JSON.parse(localStorage.getItem('arr'));
+  } else {
+    arr = JSON.parse(localStorage.getItem('arr') || {});
   }
   const updateStore = () => {
     localStorage.arr = JSON.stringify(arr);
