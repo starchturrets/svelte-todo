@@ -1,0 +1,42 @@
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+  scroll-behavior: smooth;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+
+// Reset styling
+body,
+html,
+div,
+nav,
+main,
+a,
+button,
+img,
+input,
+span,
+code,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+ol,
+li {
+  background: inherit;
+  border: none;
+  color: inherit;
+  font: inherit;
+  font-size: 100%;
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+}

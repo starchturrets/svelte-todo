@@ -6,6 +6,19 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Webpack Fun</title>
     <!-- Built Files Will be auto injected -->
+    <script>
+      // Check that service workers are supported
+      if ('serviceWorker' in navigator) {
+        // Use the window load event to keep the page load performant
+        window.addEventListener('load', () => {
+          navigator.serviceWorker
+            .register('./service-worker.js')
+            .catch(e => console.log(e));
+        });
+      } else {
+        console.log('Sorry, no offline fun for you yet');
+      }
+    </script>
   </head>
   <body></body>
 </html>

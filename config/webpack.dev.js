@@ -2,6 +2,10 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+
+const { GenerateSW } = require('workbox-webpack-plugin');
+
 const mode = process.env.NODE_ENV || 'development';
 const prod = mode === 'production';
 // Magic regexes used to check file extensions
@@ -16,12 +20,21 @@ module.exports = {
       ignoreOrder: false,
     }),
     new HtmlWebpackPlugin({
-      template: 'src/index.html',
+      template: './src/index.html',
+      favicon: './src/assets/favicon.png',
       inject: 'head',
     }),
     new ScriptExtHtmlWebpackPlugin({
       module: 'main',
     }),
+    new FaviconsWebpackPlugin({
+      publicPath: './',
+      logo: './src/assets/favicon.png',
+      prefix: 'assets/favicons',
+      inject: true,
+    }),
+
+    new GenerateSW(),
   ],
 
   module: {
