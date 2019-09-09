@@ -1,4 +1,9 @@
 node_modules
+<<<<<<< HEAD
 .cache
 .vscode
+=======
+.vscode
+.cache
+>>>>>>> refs/remotes/origin/master
 dist
