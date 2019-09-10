@@ -9,13 +9,13 @@
     <script>
       // Check that service workers are supported
       if ('serviceWorker' in navigator) {
-        console.log('Registering service worker...')
+        console.log('Registering service worker...');
         // Use the window load event to keep the page load performant
         window.addEventListener('load', () => {
-        navigator.serviceWorker
-        .register('./service-worker.js')
-        .then(() => console.log('Service Worker Registered!'))
-        .catch(e => console.log(e));
+          navigator.serviceWorker
+            .register('./service-worker.js')
+            .then(() => console.log('Service Worker Registered!'))
+            .catch(e => console.log(e));
         });
       } else {
         console.log('Sorry, no offline fun for you yet');
@@ -170,5 +170,10 @@
     />
     <link rel="shortcut icon" href="./favicon.png" />
   </head>
-  <body></body>
+  <body>
+    <noscript
+      >Unfortunately, this app doesn't work without javascript. Please enable it
+      to continue.</noscript
+    >
+  </body>
 </html>
