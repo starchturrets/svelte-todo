@@ -2,14 +2,15 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
-const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
-
+// const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 const { GenerateSW } = require('workbox-webpack-plugin');
 
-const mode = process.env.NODE_ENV || 'development';
-const prod = mode === 'production';
+// const mode = process.env.NODE_ENV || 'development';
+// const prod = mode === 'production';
 // Magic regexes used to check file extensions
 const { imageRegex, scssRegex } = require('./magic-regex');
+
 module.exports = {
   mode: 'development',
   devtool: 'inline-source-map',
@@ -27,14 +28,25 @@ module.exports = {
     new ScriptExtHtmlWebpackPlugin({
       module: 'main',
     }),
-    new FaviconsWebpackPlugin({
-      publicPath: './',
-      logo: './src/assets/favicon.png',
-      prefix: 'assets/favicons',
-      inject: true,
-    }),
 
-    new GenerateSW(),
+    new CopyPlugin([
+      {
+        from: './src/assets/favicons',
+
+        // to: './dist/assets/favicons',
+        to: path.resolve(__dirname, '../dist/assets/favicons'),
+      },
+      {
+        from: './src/assets/favicon.png',
+        to: path.resolve(__dirname, '../dist'),
+      },
+    ]),
+
+    new GenerateSW({
+      importWorkboxFrom: 'local',
+      cacheId: 'my-app',
+      cleanupOutdatedCaches: true,
+    }),
   ],
 
   module: {
@@ -45,7 +57,7 @@ module.exports = {
         use: {
           loader: 'svelte-loader',
           options: {
-            emitCss: false, //Let scss handle all the styling because webpack throws weird errors for me when I try do do scoped styles
+            emitCss: false, // Let scss handle all the styling because webpack throws weird errors for me when I try do do scoped styles
             hotReload: true,
           },
         },
@@ -93,6 +105,10 @@ module.exports = {
   },
   entry: {
     main: './src/js/index.js',
+  },
+  output: {
+    filename: '[name][contenthash].js',
+    path: path.resolve(__dirname, '../dist'),
   },
   resolve: {
     // see below for an explanation
