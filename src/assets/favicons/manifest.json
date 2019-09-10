@@ -9,6 +9,8 @@
   "start_url": "/",
   "background_color": "#fff",
   "theme_color": "#fff",
+  "prefer_related_applications": false,
+
   "icons": [
     {
       "src": "../android-chrome-36x36.png",
