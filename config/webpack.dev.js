@@ -2,24 +2,21 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
-// const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
+// const CopyPlugin = require('copy-webpack-plugin');
 const { GenerateSW } = require('workbox-webpack-plugin');
-
-// const mode = process.env.NODE_ENV || 'development';
-// const prod = mode === 'production';
-// Magic regexes used to check file extensions
-const { imageRegex, scssRegex } = require('./magic-regex');
+const { imageRegex, scssRegex, svelteRegex } = require('./magic-regex');
 
 module.exports = {
   mode: 'development',
   devtool: 'inline-source-map',
+
   plugins: [
     new MiniCssExtractPlugin({
       filename: './css/[name][contenthash].css',
       chunkFilename: '[id].css',
       ignoreOrder: false,
     }),
+
     new HtmlWebpackPlugin({
       template: './src/index.html',
       // favicon: './src/assets/favicon.png',
@@ -28,23 +25,22 @@ module.exports = {
     new ScriptExtHtmlWebpackPlugin({
       module: 'main',
     }),
+    // new CopyPlugin([
+    //   {
+    //     from: './src/assets/favicons',
 
-    new CopyPlugin([
-      {
-        from: './src/assets/favicons',
-
-        // to: './dist/assets/favicons',
-        to: path.resolve(__dirname, '../dist/assets/favicons'),
-      },
-      {
-        from: './src/assets/favicons/favicon.ico',
-        to: path.resolve(__dirname, '../dist'),
-      },
-      {
-        from: './src/assets/favicons/manifest.json',
-        to: path.resolve(__dirname, '../dist'),
-      },
-    ]),
+    //     // to: './dist/assets/favicons',
+    //     to: path.resolve(__dirname, '../dist/assets/favicons'),
+    //   },
+    //   {
+    //     from: './src/assets/favicons/favicon.ico',
+    //     to: path.resolve(__dirname, '../dist'),
+    //   },
+    //   {
+    //     from: './src/assets/favicons/manifest.json',
+    //     to: path.resolve(__dirname, '../dist'),
+    //   },
+    // ]),
 
     new GenerateSW({
       importWorkboxFrom: 'local',
@@ -56,15 +52,27 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.svelte$/,
+        test: svelteRegex,
         exclude: /node_modules/,
         use: {
           loader: 'svelte-loader',
           options: {
-            emitCss: false, // Let scss handle all the styling because webpack throws weird errors for me when I try do do scoped styles
+            emitCss: true, // Let scss handle all the styling because webpack throws weird errors for me when I try do do scoped styles
             hotReload: true,
           },
         },
+      },
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
+        ],
       },
       {
         test: scssRegex,
@@ -73,7 +81,7 @@ module.exports = {
             loader: MiniCssExtractPlugin.loader,
             options: {
               publicPath: '../',
-              hmr: process.env.NODE_ENV === 'development',
+              hmr: true,
             },
           },
 
