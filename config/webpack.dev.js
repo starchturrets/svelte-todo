@@ -40,6 +40,10 @@ module.exports = {
         from: './src/assets/favicons/favicon.ico',
         to: path.resolve(__dirname, '../dist'),
       },
+      {
+        from: './src/assets/favicons/manifest.json',
+        to: path.resolve(__dirname, '../dist'),
+      },
     ]),
 
     new GenerateSW({
