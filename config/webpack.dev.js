@@ -22,7 +22,7 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       template: './src/index.html',
-      favicon: './src/assets/favicon.png',
+      // favicon: './src/assets/favicon.png',
       inject: 'head',
     }),
     new ScriptExtHtmlWebpackPlugin({
@@ -37,7 +37,7 @@ module.exports = {
         to: path.resolve(__dirname, '../dist/assets/favicons'),
       },
       {
-        from: './src/assets/favicon.png',
+        from: './src/assets/favicons/favicon.ico',
         to: path.resolve(__dirname, '../dist'),
       },
     ]),
