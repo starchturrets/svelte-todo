@@ -21,13 +21,13 @@ export default app;
 
 // Check that service workers are supported
 
-// if ('serviceWorker' in navigator) {
-//   console.log('Registering service worker...');
-//   // Use the window load event to keep the page load performant
-//   navigator.serviceWorker
-//     .register('./service-worker.js')
-//     .then(() => console.log('Service Worker Registered!'))
-//     .catch(e => console.log(e));
-// } else {
-//   console.log('Sorry, no offline fun for you yet');
-// }
+if ('serviceWorker' in navigator) {
+  console.log('Registering service worker...');
+  // Use the window load event to keep the page load performant
+  navigator.serviceWorker
+    .register('./service-worker.js')
+    .then(() => console.log('Service Worker Registered!'))
+    .catch(e => console.log(e));
+} else {
+  console.log('Sorry, no offline fun for you yet');
+}
