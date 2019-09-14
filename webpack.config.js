@@ -35,15 +35,15 @@ if (isProd) {
     new CopyPlugin([
       {
         from: './src/assets/favicons',
-        to: path.resolve(__dirname, '../dist/assets/favicons'),
+        to: path.resolve(__dirname, './dist/assets/favicons'),
       },
       {
         from: './src/assets/favicons/favicon.ico',
-        to: path.resolve(__dirname, '../dist'),
+        to: path.resolve(__dirname, './dist'),
       },
       {
         from: './src/assets/favicons/manifest.json',
-        to: path.resolve(__dirname, '../dist'),
+        to: path.resolve(__dirname, '.dist'),
       },
     ]),
     new GenerateSW({
@@ -90,7 +90,7 @@ module.exports = {
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              publicPath: '../',
+              publicPath: './',
               hmr: true,
             },
           },
