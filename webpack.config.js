@@ -57,7 +57,8 @@ module.exports = {
   mode: process.env.NODE_ENV,
   devtool: 'inline-source-map',
 
-  plugins,
+  // eslint-disable-next-line object-shorthand
+  plugins: plugins,
   module: {
     rules: [
       {
@@ -129,7 +130,7 @@ module.exports = {
   },
   output: {
     filename: '[name][contenthash].js',
-    path: path.resolve(__dirname, '../dist'),
+    path: path.resolve(__dirname, './dist'),
   },
   resolve: {
     // see below for an explanation
