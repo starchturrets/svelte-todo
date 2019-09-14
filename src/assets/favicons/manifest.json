@@ -1,6 +1,6 @@
 {
   "name": "Svelte To Do List, with offline support",
-  "short_name": "todo-svelte",
+  "short_name": "Svelte ToDo",
   "description": "This is my todo list, which I use for school",
   "dir": "auto",
   "lang": "en-US",
