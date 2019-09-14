@@ -18,10 +18,10 @@ const app = new App({
 });
 
 export default app;
-
+console.log(process.env.NODE_ENV);
 // Check that service workers are supported
 
-if ('serviceWorker' in navigator) {
+if ('serviceWorker' in navigator && process.env.NODE_ENV === 'production') {
   console.log('Registering service worker...');
   // Use the window load event to keep the page load performant
   navigator.serviceWorker

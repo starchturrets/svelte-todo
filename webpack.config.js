@@ -2,53 +2,62 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
-// const CopyPlugin = require('copy-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 const { GenerateSW } = require('workbox-webpack-plugin');
-const { imageRegex, scssRegex, svelteRegex } = require('./magic-regex');
+// Magical regexes of death
+const imageRegex = /\.(png|jpe?g|gif)$/i;
+const scssRegex = /.s[ac]ss$/i;
+const svelteRegex = /\.svelte$/;
+const cssRegex = /\.css$/;
 
-module.exports = {
-  mode: 'development',
-  devtool: 'inline-source-map',
+const isProd = process.env.NODE_ENV === 'production';
+let plugins = [
+  new MiniCssExtractPlugin({
+    filename: './css/[name][contenthash].css',
+    chunkFilename: '[id].css',
+    ignoreOrder: false,
+  }),
 
-  plugins: [
-    new MiniCssExtractPlugin({
-      filename: './css/[name][contenthash].css',
-      chunkFilename: '[id].css',
-      ignoreOrder: false,
-    }),
+  new HtmlWebpackPlugin({
+    template: './src/index.html',
+    // favicon: './src/assets/favicon.png',
+    inject: 'head',
+  }),
+  new ScriptExtHtmlWebpackPlugin({
+    module: 'main',
+  }),
+];
 
-    new HtmlWebpackPlugin({
-      template: './src/index.html',
-      // favicon: './src/assets/favicon.png',
-      inject: 'head',
-    }),
-    new ScriptExtHtmlWebpackPlugin({
-      module: 'main',
-    }),
-    // new CopyPlugin([
-    //   {
-    //     from: './src/assets/favicons',
-
-    //     // to: './dist/assets/favicons',
-    //     to: path.resolve(__dirname, '../dist/assets/favicons'),
-    //   },
-    //   {
-    //     from: './src/assets/favicons/favicon.ico',
-    //     to: path.resolve(__dirname, '../dist'),
-    //   },
-    //   {
-    //     from: './src/assets/favicons/manifest.json',
-    //     to: path.resolve(__dirname, '../dist'),
-    //   },
-    // ]),
-
+if (isProd) {
+  // Do PWA stuff when building, but leave it off during development
+  plugins = [
+    ...plugins,
+    new CopyPlugin([
+      {
+        from: './src/assets/favicons',
+        to: path.resolve(__dirname, '../dist/assets/favicons'),
+      },
+      {
+        from: './src/assets/favicons/favicon.ico',
+        to: path.resolve(__dirname, '../dist'),
+      },
+      {
+        from: './src/assets/favicons/manifest.json',
+        to: path.resolve(__dirname, '../dist'),
+      },
+    ]),
     new GenerateSW({
       importWorkboxFrom: 'local',
       cacheId: 'my-app',
       cleanupOutdatedCaches: true,
     }),
-  ],
+  ];
+}
+module.exports = {
+  mode: process.env.NODE_ENV,
+  devtool: 'inline-source-map',
 
+  plugins,
   module: {
     rules: [
       {
@@ -57,15 +66,15 @@ module.exports = {
         use: {
           loader: 'svelte-loader',
           options: {
-            emitCss: true, // Let scss handle all the styling because webpack throws weird errors for me when I try do do scoped styles
+            emitCss: true,
             hotReload: true,
           },
         },
       },
       {
-        test: /\.css$/,
+        test: cssRegex,
         use: [
-          'style-loader',
+          !isProd ? 'style-loader' : MiniCssExtractPlugin.loader, // Use style-loader for hmr during development
           {
             loader: 'css-loader',
             options: {
