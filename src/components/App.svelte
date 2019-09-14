@@ -53,7 +53,7 @@
   div.list {
     background: #fff;
     border-radius: 4px;
-    box-shadow: 0 10px 10px rgb(59, 58, 58), 0 1px 20px rgb(59, 58, 58);
+    box-shadow: 0 5px 5px #e2e0e0, 0 15px 30px #e2e0e0;
     display: flex;
     flex-direction: column;
     font-size: 1.2rem;

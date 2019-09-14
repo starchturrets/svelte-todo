@@ -43,7 +43,7 @@ if (isProd) {
       },
       {
         from: './src/assets/favicons/manifest.json',
-        to: path.resolve(__dirname, '.dist'),
+        to: path.resolve(__dirname, './dist'),
       },
     ]),
     new GenerateSW({
