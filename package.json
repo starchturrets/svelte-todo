@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "rm -rf dist && webpack-dev-server  --mode=development --config ./webpack.config.js",
+    "dev": "rm -rf dist && webpack-dev-server --host=0.0.0.0 --disable-host-check --useLocalIp  --mode=development --config ./webpack.config.js",
     "build": "rm -rf dist && webpack -p --config ./webpack.config.js"
   },
   "keywords": [],
