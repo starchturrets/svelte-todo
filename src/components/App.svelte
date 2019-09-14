@@ -1,8 +1,10 @@
 <script>
+  import Component from './item.svelte';
+
   export let name;
   export let arr;
   let msg = '';
-
+  // const test = 'boo';
   const updateStore = () => {
     localStorage.arr = JSON.stringify(arr);
   };
@@ -20,6 +22,7 @@
         done: false,
         string: ev.target.value,
       };
+
       // arr.push(item);
       // arr = arr;
       arr = [...arr, item];
@@ -49,121 +52,83 @@
 <style>
   div.list {
     background: #fff;
-    box-shadow: 1px 1px 1px #000;
+    border-radius: 4px;
+    box-shadow: 0 10px 10px rgb(59, 58, 58), 0 1px 20px rgb(59, 58, 58);
     display: flex;
     flex-direction: column;
     font-size: 1.2rem;
-    height: 30rem;
+    height: 32rem;
     margin: 2rem auto;
     padding: 2.8rem 3.5rem;
     width: 25rem;
   }
-  div.list--items {
+
+  div.list__container {
     flex-grow: 1;
     overflow-x: scroll;
-    /* max-height: 15rem; */
     padding: 0.7rem;
     width: 100%;
   }
-  div.list--items ul,
-  div.list--items ol,
-  label {
-    width: inherit;
-    font-size: 0.9rem;
-  }
-  div.list--items ol label {
-    flex-direction: row;
-    display: flex;
-    padding: 0;
-    margin: 0.4rem 0;
-    /* max-width: 1em !important; */
-    word-break: break-all;
-  }
-  div.item {
-    overflow-wrap: break-word;
-    align-self: center;
-    /* overflow: auto; */
-  }
-  ol label button.remove--item {
-    cursor: pointer;
-    font-size: 0.95rem;
-    justify-self: flex-end !important;
-    margin-left: auto;
-    margin-right: 0;
-    text-decoration: none;
-  }
-  /* button {
-    justify-items: flex-end;
-  } */
-  .done {
-    text-decoration: line-through;
-  }
-  button.clear--list {
+
+  .list__clear {
     margin-top: 1rem;
-    margin-bottom: 0rem;
+    margin-bottom: 0;
     align-self: center;
     justify-self: flex-end;
+
     /* justify-self: center; */
   }
+
   h1 {
     margin: 0.5rem;
   }
+
   input[type='text'] {
     border-radius: 1px;
-    box-shadow: inset 0px -2px 1px #999;
-    margin: 0.5rem;
-    padding: 0.5rem;
+
+    /* box-shadow: inset 0 -2px 1px #999; */
+    font-size: 0.91em;
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+    padding: 0.75rem 1rem;
     max-width: 18rem;
   }
-  input[type='checkbox'] {
-    margin-right: 0.5rem;
+
+  input[type='text']:focus {
+    border-radius: 4px;
+    box-shadow: 0 0 0 2px rgb(5, 130, 155);
+
+    /* outline: solid 2px rgb(5, 130, 155); */
   }
 </style>
+
 <div class="list">
+  <!-- <Component jsonData="boom" /> -->
   <h1>To Do List</h1>
   <form action="">
     <input
       type="text"
       name=""
       id=""
-      on:keydown="{addItem}"
-      bind:value="{msg}"
-      placeholder="Type Something"
-    />
+      on:keydown={addItem}
+      bind:value={msg}
+      placeholder="Type Something" />
   </form>
 
-  <div class="list--items">
+  <div class="list__container">
     <ul>
       {#each arr as item, index}
-      <ol>
-        <label
-          for="item-{index}"
-          class="{item.done === true ? 'done' : ''} item"
-        >
-          <div class="item">
-            <input
-              data-index="{index}"
-              type="checkbox"
-              id="item-{index}"
-              on:change="{toggle}"
-              checked="{item.done}"
-            />
-          </div>
-          {item.string}
-          <button
-            class="remove--item"
-            data-index="{index}"
-            on:click="{removeItem}"
-          >
-            X
-          </button>
-        </label>
-      </ol>
+        <Component {index} {item} {toggle} {removeItem} />
       {/each}
     </ul>
   </div>
 
-  <button class="clear--list" on:click="{()=>{arr = [];updateStore()}}">
+  <button
+    class="list__clear"
+    on:click={() => {
+      arr = [];
+      updateStore();
+    }}>
     Clear
   </button>
 </div>
