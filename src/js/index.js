@@ -29,5 +29,5 @@ if ('serviceWorker' in navigator) {
     .then(() => console.log('Service Worker Registered!'))
     .catch(e => console.log(e));
 } else {
-  console.log('Sorry, no offline fun for you yet');
+  console.log('Sorry, no offline fun for you yet.');
 }

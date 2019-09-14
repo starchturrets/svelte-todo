@@ -69,6 +69,7 @@
   div.list--items ol,
   label {
     width: inherit;
+    font-size: 0.9rem;
   }
   div.list--items ol label {
     flex-direction: row;
@@ -114,6 +115,9 @@
     padding: 0.5rem;
     max-width: 18rem;
   }
+  input[type='checkbox'] {
+    margin-right: 0.5rem;
+  }
 </style>
 <div class="list">
   <h1>To Do List</h1>
@@ -132,8 +136,11 @@
     <ul>
       {#each arr as item, index}
       <ol>
-        <label for="item-{index}">
-          <div class="{item.done === true ? 'done' : ''} item">
+        <label
+          for="item-{index}"
+          class="{item.done === true ? 'done' : ''} item"
+        >
+          <div class="item">
             <input
               data-index="{index}"
               type="checkbox"
