@@ -6,8 +6,9 @@
 </script>
 
 <style>
-  div {
-    font: inherit;
+  label {
+    font-weight: 400;
+    color: #444;
   }
 
   button.remove--item {

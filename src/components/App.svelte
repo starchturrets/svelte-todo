@@ -53,10 +53,11 @@
   div.list {
     background: #fff;
     border-radius: 4px;
-    border-top: solid 5px #573280;
+    border-top: solid 5px #54a188;
 
     /* box-shadow: 0 5px 5px #454545, 0 15px 30px #454545; */
-    box-shadow: 1px 6px 10px 0 #000;
+
+    box-shadow: 0 3px 3px 0 #454545;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -92,7 +93,7 @@
   input[type='text'] {
     border-radius: 4px;
     box-shadow: inset 0 0 1px #999;
-    font-size: 0.91em;
+    font-size: 0.9em;
     margin: auto;
     margin-bottom: 0.5rem;
     margin-top: 0.5rem;
@@ -101,7 +102,7 @@
   }
 
   input[type='text']::placeholder {
-    font-weight: 300;
+    font-weight: 400;
   }
 
   input[type='text']:focus {
