@@ -57,21 +57,25 @@
 
     /* box-shadow: 0 5px 5px #454545, 0 15px 30px #454545; */
 
-    box-shadow: 0 3px 3px 0 #454545;
+    box-shadow: 0 5px 4px 0 #c5c2c2;
     display: flex;
     align-items: center;
     flex-direction: column;
     font-size: 1.2rem;
-    height: 32rem;
+    height: 38rem;
     margin: 2rem auto;
     padding: 2.8rem 3.5rem;
-    width: 25rem;
+    width: 28rem;
   }
 
   h1 {
     align-self: flex-start;
     font-weight: 500;
     margin: 0.5rem;
+  }
+
+  form {
+    width: 100%;
   }
 
   div.list__container {
@@ -82,8 +86,11 @@
   }
 
   .list__clear {
-    margin-top: 1rem;
-    margin-bottom: 0;
+    /* margin-top: 1rem; */
+
+    /* margin-bottom: 0; */
+    position: relative;
+    top: 1.69rem;
     align-self: center;
     justify-self: flex-end;
 
@@ -98,7 +105,7 @@
     margin-bottom: 0.5rem;
     margin-top: 0.5rem;
     padding: 0.75rem 1rem;
-    max-width: 100%;
+    width: 100%;
   }
 
   input[type='text']::placeholder {
@@ -137,13 +144,14 @@
       {/each}
     </ul>
   </div>
-
-  <button
-    class="list__clear"
-    on:click={() => {
-      arr = [];
-      updateStore();
-    }}>
-    Clear
-  </button>
+  {#if arr.length > 0}
+    <button
+      class="list__clear"
+      on:click={() => {
+        arr = [];
+        updateStore();
+      }}>
+      Clear
+    </button>
+  {/if}
 </div>
