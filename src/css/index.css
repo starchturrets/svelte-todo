@@ -1,7 +1,7 @@
-@import './reset.scss';
+@import './reset.css';
 
 body {
-  // background: linear-gradient(-45deg, rgb(5, 130, 155), rgba(0, 212, 255, 1));
+  /* // background: linear-gradient(-45deg, rgb(5, 130, 155), rgba(0, 212, 255, 1)); */
   background-color: #fff;
   font-family:
     -apple-system,

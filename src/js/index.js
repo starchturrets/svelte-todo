@@ -1,4 +1,4 @@
-import '../scss/index.scss';
+import '../css/index.css';
 import App from '../components/App.svelte';
 
 console.log('Hello World');
