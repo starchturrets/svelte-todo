@@ -52,7 +52,7 @@
   div.item__input__box {
     filter: opacity(0.5);
     background: #fff;
-    background-image: url('/assets/checkbox.png');
+    background-image: url('./checkbox.png');
     background-size: 0.75rem;
     height: 0.75rem;
     width: 0.75rem;
@@ -62,7 +62,7 @@
   }
 
   input[type='checkbox']:checked + div.item__input__box {
-    background-image: url('/assets/checked.png');
+    background-image: url('./checked.png');
     background-size: 0.75rem;
   }
 </style>
