@@ -31,14 +31,13 @@
     display: flex;
     padding: 0;
     margin: 0.4rem 0;
-
-    /* max-width: 1em !important; */
     word-break: break-all;
   }
 
   div.item {
     overflow-wrap: break-word;
     align-self: center;
+    position: relative;
   }
 
   .done {
@@ -46,7 +45,25 @@
   }
 
   input[type='checkbox'] {
+    opacity: 0;
     margin-right: 0.5rem;
+  }
+
+  div.item__input__box {
+    filter: opacity(0.5);
+    background: #fff;
+    background-image: url('../assets/checkbox.png');
+    background-size: 0.75rem;
+    height: 0.75rem;
+    width: 0.75rem;
+    position: absolute;
+    top: 0.15rem;
+    left: 0.25rem;
+  }
+
+  input[type='checkbox']:checked + div.item__input__box {
+    background-image: url('../assets/checked.png');
+    background-size: 0.75rem;
   }
 </style>
 
@@ -56,9 +73,12 @@
       <input
         data-index={index}
         type="checkbox"
+        class="item__input"
         id="item-{index}"
         on:change={toggle}
         checked={item.done} />
+      <div class="item__input__box" />
+
     </div>
     {item.string}
     <button class="remove--item" data-index={index} on:click={removeItem}>

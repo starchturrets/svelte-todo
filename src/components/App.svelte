@@ -1,5 +1,6 @@
 <script>
   import Component from './item.svelte';
+  // import '../scss/reset.scss';
 
   export let name;
   export let arr;
@@ -50,16 +51,15 @@
 </script>
 
 <style>
+  /* @import ('../scss/reset.scss'); */
+
   div.list {
+    align-items: center;
     background: #fff;
-    border-radius: 4px;
-    border-top: solid 5px #54a188;
-
-    /* box-shadow: 0 5px 5px #454545, 0 15px 30px #454545; */
-
+    border-radius: 2px;
+    border-top: solid 5px #ff3e00;
     box-shadow: 0 5px 4px 0 #c5c2c2;
     display: flex;
-    align-items: center;
     flex-direction: column;
     font-size: 1.2rem;
     height: 38rem;
@@ -86,19 +86,14 @@
   }
 
   .list__clear {
-    /* margin-top: 1rem; */
-
-    /* margin-bottom: 0; */
-    position: relative;
-    top: 1.69rem;
     align-self: center;
     justify-self: flex-end;
-
-    /* justify-self: center; */
+    position: relative;
+    top: 1.69rem;
   }
 
   input[type='text'] {
-    border-radius: 4px;
+    border-radius: 2px;
     box-shadow: inset 0 0 1px #999;
     font-size: 0.9em;
     margin: auto;
@@ -115,8 +110,6 @@
   input[type='text']:focus {
     box-shadow: 0 0 0 2px #444;
     outline: none;
-
-    /* outline: solid 2px rgb(5, 130, 155); */
   }
 
   ul {
