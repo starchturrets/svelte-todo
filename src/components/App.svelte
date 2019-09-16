@@ -15,8 +15,8 @@
     }
     if (
       ev.key === 'Enter' &&
-      ev.target.value.trim().length > 0 // &&
-      // ev.target.value.length < 49
+      ev.target.value.trim().length > 0 &&
+      ev.target.value.length < 49
     ) {
       ev.preventDefault();
       const item = {
