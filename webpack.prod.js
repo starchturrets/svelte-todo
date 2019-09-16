@@ -12,7 +12,7 @@ const svelteRegex = /\.svelte$/;
 const cssRegex = /\.css$/;
 
 const isProd = process.env.NODE_ENV === 'production';
-let plugins = [
+const plugins = [
   new MiniCssExtractPlugin({
     filename: './css/[name][contenthash].css',
     chunkFilename: '[id].css',
@@ -27,35 +27,29 @@ let plugins = [
   new ScriptExtHtmlWebpackPlugin({
     module: 'main',
   }),
+  new CopyPlugin([
+    {
+      from: './src/assets/favicons',
+      to: path.resolve(__dirname, './dist/assets/favicons'),
+    },
+    {
+      from: './src/assets/favicons/favicon.ico',
+      to: path.resolve(__dirname, './dist'),
+    },
+    {
+      from: './src/assets/favicons/manifest.json',
+      to: path.resolve(__dirname, './dist'),
+    },
+  ]),
+  new GenerateSW({
+    importWorkboxFrom: 'local',
+    cacheId: 'my-app',
+    cleanupOutdatedCaches: true,
+  }),
 ];
 
-if (isProd) {
-  // Do PWA stuff when building, but leave it off during development
-  plugins = [
-    ...plugins,
-    new CopyPlugin([
-      {
-        from: './src/assets/favicons',
-        to: path.resolve(__dirname, './dist/assets/favicons'),
-      },
-      {
-        from: './src/assets/favicons/favicon.ico',
-        to: path.resolve(__dirname, './dist'),
-      },
-      {
-        from: './src/assets/favicons/manifest.json',
-        to: path.resolve(__dirname, './dist'),
-      },
-    ]),
-    new GenerateSW({
-      importWorkboxFrom: 'local',
-      cacheId: 'my-app',
-      cleanupOutdatedCaches: true,
-    }),
-  ];
-}
 module.exports = {
-  mode: process.env.NODE_ENV,
+  mode: 'production',
   devtool: 'inline-source-map',
 
   // eslint-disable-next-line object-shorthand
