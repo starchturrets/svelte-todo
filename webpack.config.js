@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const { GenerateSW } = require('workbox-webpack-plugin');
+const CssUrlRelativePlugin = require('css-url-relative-plugin');
 // Magical regexes of death
 const imageRegex = /\.(png|jpe?g|gif)$/i;
 const scssRegex = /.s[ac]ss$/i;
@@ -17,7 +18,7 @@ let plugins = [
     chunkFilename: '[id].css',
     ignoreOrder: false,
   }),
-
+  new CssUrlRelativePlugin(/* options */),
   new HtmlWebpackPlugin({
     template: './src/index.html',
     // favicon: './src/assets/favicon.png',
