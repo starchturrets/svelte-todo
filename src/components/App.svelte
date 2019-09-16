@@ -13,11 +13,7 @@
     if (ev.key === 'Enter') {
       ev.preventDefault();
     }
-    if (
-      ev.key === 'Enter' &&
-      ev.target.value.trim().length > 0 &&
-      ev.target.value.length < 49
-    ) {
+    if (ev.key === 'Enter') {
       ev.preventDefault();
       const item = {
         done: false,
